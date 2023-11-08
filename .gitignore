@@ -130,4 +130,4 @@ dist
 .pnp.*
 
 #Secrets.js (api Key)
-src/secrets.js
+.src/secrets.js
