@@ -3,26 +3,64 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@700;800&family=Red+Hat+Display:wght@400;500&display=swap" rel="stylesheet" />
  <link rel="stylesheet" href="styles/styles.css">
  <title>Document</title>
 </head>
 <body>
- <div class="navBar">
+ <div class="exp a">
+  <div class="exp-backgraund">
+    <div class="exp-close">
+      <img class="exp-close--btn" src="./styles/icons/close-circle-svgrepo-com.svg" alt="">
+    </div>
+    
+    <div class="banner">
+      <img class="banner-img" src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/yFPQ4JhhirnCVe2UIKGMYX7TOGZ.jpg" alt="">
+      <a class="favorite active" href="">♥ Añadir a Favoritos</a>
+    </div>
+    <div class="exp-title">
+      <h3>Ataque a los Titanes <span>(2013)</span></h3>
+      <div class="exp-category">
+        <span>TV-MA</span>
+          <ul>
+            <li><a href="">Animacion</a></li>
+            <li><a href="">Animacion</a></li>
+            <li><a href="">Animacion</a></li>
+          </ul>
+      </div>
+      
+    </div>
+    <div class="exp-sinopsis">
+      <p class="t-t">Vista General</p>
+      <p class="t-s">Hace cien años, los titanes atacaron y diezmaron a la humanidad. Para sobrevivir, esta se recluyó en grandes ciudades amuralladas, creyendo que estaría segura para siempre. Pero, cien años después de aquel ataque, un titán colosal hace su aparición en una de las urbes, destruye el parapeto y permite que sus congéneres menores devoren de nuevo a los hombres. El Cuerpo de Exploradores, al que pertenece Eren Jaeger, deberá enfrentarse a ellos y contraatacarlos, para que la humanidad pueda vivir de nuevo en paz.</p>
+    </div>
+    <div class="btn-seeMore">
+      <div id="activ-seeMore">
+        <img id="btn-play" src="./styles/icons/play-button-svgrepo-com.svg" alt="">
+        <a id="btn-t" href="">Reproducir trailer</a>
+      </div>
+    </div>
+  </div>
+    
+ </div>
+ <div class="navBar ">
    <h1 class="title-page">Info Pelis</h1>
    <ul class="navBar-items">
-    <li><a href="">Inicio</a></li>
-    <li> <a href="">Perfil</a></li>
-    <li><a href="">Buscar</a></li>
+    <li><a class="active" href="">Inicio</a></li>
+    <li> <a class="active" href="">Perfil</a></li>
+    <li><a class="active" href="">Buscar</a></li>
    </ul>
  </div>
- <section class="intro">
+ <section class="intro ">
   <article class="intro-body">
    <h2>¿Que es Info Pelis?</h2>
    <p>Es una plataforma creada por la comunidad para poder enterarte todo sobre tus peliculas y series preferidas. Estrenos, capítulos, reparto, sinopcis, recomendaciones y mucho mas... </p>
-   <span><a href="">Crea una cuenta</a> para recibir alertas y recomendaciones personalizadas segun tus gustos</span>
+   <span><a class="active" href="">Crea una cuenta</a> para recibir alertas y recomendaciones personalizadas segun tus gustos</span>
   </article>
  </section>
-<section class="films" >
+ <section class="films " >
  <div class="films-second">
   <h3>Películas</h3>
   <div class="arrow-content">
@@ -32,69 +70,28 @@
   
  </div>
  <ul class="list-cards" id="scrolling-card-film">
-  <li>
+  <li id="li">
    <div class="container">
     <div class="card">
-     </div>
+      <img class="card-img" src="https://image.tmdb.org/t/p/original/yFPQ4JhhirnCVe2UIKGMYX7TOGZ.jpg" alt="">
+    </div>
     <span class="title-card">Titulo de la     pelicula</span>
     </div>
-  </li>
-  <li>
-   <div class="container">
-    <div class="card">
-     </div>
-    <span class="title-card">Titulo de la     pelicula</span>
-    </div>
-  </li>
-  <li>
-   <div class="container">
-    <div class="card">
-     </div>
-    <span class="title-card">Titulo de la     pelicula</span>
-    </div>
-  </li>
-  <li>
-   <div class="container">
-    <div class="card">
-     </div>
-    <span class="title-card">Titulo de la     pelicula</span>
-    </div>
-  </li>
-  <li>
-   <div class="container">
-    <div class="card">
-     </div>
-    <span class="title-card">Titulo de la     pelicula</span>
-    </div>
-  </li>
-  <li>
-   <div class="container">
-    <div class="card">
-     </div>
-    <span class="title-card">Titulo de la     pelicula</span>
-    </div>
-  </li>
-  <li>
-   <div class="container">
-    <div class="card">
-     </div>
-    <span class="title-card">Titulo de la     pelicula</span>
-    </div>
-  </li>
+
  </ul>
  
 
-</section>
-<section class="tv" >
- <div class="tv-second">
+ </section>
+ <section class="tv " >
+  <div class="tv-second">
   <h3>Series</h3>
   <div class="arrow-content">
    <img class="arrow" id="arrow-left-tv" src="./styles/icons/reshot-icon-right-arrow-button-YAB8GEM7SD-c5f61.svg" alt="scrolling arrow">
     <img class="arrow" id="arrow-right-tv" src="./styles/icons/reshot-icon-right-arrow-button-YAB8GEM7SD-c5f61.svg" alt="scrolling arrow">
   </div>
   
- </div>
- <ul class="list-cards" id="scrolling-card-tv">
+  </div>
+  <ul class="list-cards" id="scrolling-card-tv">
   <li>
    <div class="container">
     <div class="card">
@@ -144,36 +141,37 @@
     <span class="title-card">Titulo de la     pelicula</span>
     </div>
   </li>
- </ul>
+  </ul>
  
 
-</section>
-<section class="category">
- <h3>Categorias</h3>
- <ul>
-  <li><a href="">accion</a></li>
-  <li><a href="">accion</a></li>
-  <li><a href="">accion</a></li>
-  <li><a href="">accion</a></li>
-  <li><a href="">accion</a></li>
-  <li><a href="">accion</a></li>
-  <li><a href="">accion</a></li>
-  <li><a href="">accion</a></li>
-  <li><a href="">accion</a></li>
-  <li><a href="">accion</a></li>
+ </section>
+ <section class="category ">
+  <h3>Categorias</h3>
+  <ul>
+   <li><a href="">accion</a></li>
+   <li><a href="">accion</a></li>
+   <li><a href="">accion</a></li>
+   <li><a href="">accion</a></li>
+   <li><a href="">accion</a></li>
+   <li><a href="">accion</a></li>
+   <li><a href="">accion</a></li>
+   <li><a href="">accion</a></li>
+   <li><a href="">accion</a></li>
+   <li><a href="">accion</a></li>
 
- </ul>
-</section>
+  </ul>
+ </section>
 
-<footer>
+ <footer class="">
  <p class="text-footer"> Proyecto realizado por Prituluk</p>
-</footer>
+ </footer>
 
 
 
 
 
-<script src="./src/secrets.js"></script>
+ <script src="./src/secrets.js"></script>
  <script src="./src/main.js"></script>
+ <script src="./src/inter.js"></script>
 </body>
 </html>

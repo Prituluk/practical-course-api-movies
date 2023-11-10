@@ -1,20 +1,27 @@
-const leftBtnFilms = document.querySelector("#arrow-left-films");
-const rightBtnFilms = document.querySelector("#arrow-right-films");
-const leftBtnTv = document.querySelector("#arrow-left-tv");
-const rightBtnTv = document.querySelector("#arrow-right-tv");
-const scrollContentFilm = document.querySelector("#scrolling-card-film");
-const scrollContentTv = document.querySelector("#scrolling-card-tv");
+async function getTrendingMoviesPreview() {
+ const res = await fetch("https://api.themoviedb.org/3/trending/movie/day?api_key=" + API_KEY);
+ const data = await res.json();
 
-leftBtnFilms.addEventListener("click", () => {
- scrollContentFilm.scrollLeft -= 300;
-});
-rightBtnFilms.addEventListener("click", () => {
- scrollContentFilm.scrollLeft += 300;
-});
 
-leftBtnTv.addEventListener("click", () => {
- scrollContentTv.scrollLeft -= 300;
-});
-rightBtnTv.addEventListener("click", () => {
- scrollContentTv.scrollLeft += 300;
-});
+ const movies = data.results;
+ movies.forEach(movie => {
+  const li = document.querySelector("#li");
+  const container = document.createElement('div');
+  container.classList.add('container');
+
+  const card = document.createElement('div');
+  card.classList.add('card');
+
+  const img = document.createElement('img');
+  img.classList.add('card-img');
+  img.setAttribute('alt', movie.title);
+  img.setAttribute('src', 'https://image.tmdb.org/t/p/w300' + movie.poster_path,);
+
+  card.appendChild(img);
+  container.appendChild(card);
+  li.appendChild(container);
+ });
+ console.log({data, movies});
+}
+
+getTrendingMoviesPreview();
