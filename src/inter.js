@@ -18,3 +18,12 @@ leftBtnTv.addEventListener("click", () => {
 rightBtnTv.addEventListener("click", () => {
  scrollContentTv.scrollLeft += 500;
 });
+
+// 2DP
+const exp = document.querySelector('.exp');
+const expCloseBtn = document.querySelector('.exp-close--btn');
+
+
+expCloseBtn.addEventListener('click', () => {
+ exp.classList.add('a');
+})
