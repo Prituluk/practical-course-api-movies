@@ -20,10 +20,5 @@ rightBtnTv.addEventListener("click", () => {
 });
 
 // 2DP
-const exp = document.querySelector('.exp');
-const expCloseBtn = document.querySelector('.exp-close--btn');
+// const exp = document.querySelector('.exp');
 
-
-expCloseBtn.addEventListener('click', () => {
- exp.classList.add('a');
-})
