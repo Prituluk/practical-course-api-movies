@@ -2,6 +2,7 @@ titleHome.addEventListener('click', () => {
  location.hash='#home';
 })
 expCloseBtn.addEventListener('click', () => {
+ // expBackgraund.innerHTML='';
  location.hash='#home';
 })
 searchBtn.addEventListener('click', () => {
@@ -82,6 +83,10 @@ function moviePage(){
  category.classList.add('a');
  console.log('category');
  console.log('movie');
+
+ const [_, movieId] = location.hash.split('=');
+ getMovieId(movieId);
+ console.log(movieId);
 }
 function categoryPage(){
  exp.classList.add('a');

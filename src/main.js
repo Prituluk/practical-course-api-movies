@@ -14,6 +14,10 @@ async function getTrendingMoviesPreview() {
   
   const containerMovies = document.createElement('div');
   containerMovies.classList.add('container');
+  containerMovies.addEventListener('click', () => {
+    location.hash='#movie=' + movie.id;
+    
+  });
 
   const card = document.createElement('div');
   card.classList.add('card');
@@ -33,6 +37,7 @@ async function getTrendingMoviesPreview() {
   liMovies.appendChild(containerMovies);
 
     // BACK CARD 
+    
   // const expB = document.querySelector('.exp-backgraund');
   // const banner = document.createElement('div');
   // banner.classList.add('banner');
@@ -50,9 +55,42 @@ async function getTrendingMoviesPreview() {
  console.log({data, movies});
 }
 
+async function getMovieId(movieId){
+  
+  const resMovieId = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`);
+  const rtaMovie = await resMovieId.json();
+
+  
+  expBackgraund.style.backgroundImage = `linear-gradient(rgba(5, 7, 12, 0.75), rgba(5, 7, 12, 0.75)), url('https://image.tmdb.org/t/p/original${rtaMovie.backdrop_path}')`;
+  const banner = document.querySelector('.banner');
+  const imgExt = document.querySelector('.banner-img');
+  imgExt.setAttribute('alt', rtaMovie.title);
+  imgExt.setAttribute('src', 'https://image.tmdb.org/t/p/w500' + rtaMovie.poster_path);
+  const fav = document.querySelector('.favorite');
+
+  const titleContain = document.querySelector('.exp-title');
+  const titleExp = document.querySelector('.title-film-esp');
+  const dateFilm = document.querySelector('#date-film');
+  const [year, m, d ] = rtaMovie.release_date.split('-');
+  dateFilm.innerHTML = ` (${year})`; 
+  titleExp.innerHTML = rtaMovie.title;
+
+  exp.appendChild(expBackgraund);
+  expBackgraund.appendChild(banner);
+  banner.appendChild(imgExt);
+  banner.appendChild(fav);
+  expBackgraund.appendChild(titleContain);
+  titleContain.appendChild(titleExp);
+  titleExp.appendChild(dateFilm);
 
 
-async function getTrendingTvPreview() {
+  
+  console.log({rtaMovie});
+}
+
+  
+
+  async function getTrendingTvPreview() {
  const res = await fetch("https://api.themoviedb.org/3/trending/tv/day?api_key=" + API_KEY);
  const data = await res.json();
  const tvs = data.results;
@@ -155,7 +193,7 @@ async function getMoviesByCategory(id) {
 
 
 async function getMoviesBySearch(query) {
-  const resQuery = await fetch(`https://api.themoviedb.org/3/search/movie?query=${query}&api_key=${API_KEY}`);
+  const resQuery = await fetch(`https://api.themoviedb.org/3/search/multi?query=${query}&api_key=${API_KEY}`);
   
   const genreData = await resQuery.json();
   const genre = genreData.results;

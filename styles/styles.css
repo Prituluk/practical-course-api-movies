@@ -307,8 +307,7 @@ footer{
  height: 100%;
  display: grid;
  gap: 20px;
- background: linear-gradient(rgba(5, 7, 12, 0.75), rgba(5, 7, 12, 0.75)), 
- url("https://image.tmdb.org/t/p/original/uACJw45EEkB5mfFw4SgMtgZgBBJ.jpg");
+ background: linear-gradient(rgba(5, 7, 12, 0.75), rgba(5, 7, 12, 0.75));
  background-size: cover;
  grid-template-columns: 1fr 1fr 1fr;
  grid-template-rows: repeat(5, 1fr);

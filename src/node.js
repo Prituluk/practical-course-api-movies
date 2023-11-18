@@ -18,3 +18,4 @@ const searchBtn = document.querySelector('.search');
 const searchBtn1 = document.querySelector('.searchs');
 const inputTextSearch = document.querySelector('#textSearch');
 const inputTextSearch1 = document.querySelector('#textSearch1');
+const expBackgraund = document.querySelector('.exp-backgraund')
