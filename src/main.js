@@ -14,10 +14,12 @@ async function getTrendingMoviesPreview() {
   
   const containerMovies = document.createElement('div');
   containerMovies.classList.add('container');
+  
   containerMovies.addEventListener('click', () => {
     location.hash='#movie=' + movie.id;
     
   });
+  
 
   const card = document.createElement('div');
   card.classList.add('card');
@@ -30,6 +32,7 @@ async function getTrendingMoviesPreview() {
   img.classList.add('card-img');
   img.setAttribute('alt', movie.title);
   img.setAttribute('src', 'https://image.tmdb.org/t/p/w300' + movie.poster_path,);
+  
 
   card.appendChild(img);
   containerMovies.appendChild(card);
@@ -55,12 +58,15 @@ async function getTrendingMoviesPreview() {
  console.log({data, movies});
 }
 
+
 async function getMovieId(movieId){
   
   const resMovieId = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`);
   const rtaMovie = await resMovieId.json();
+  const categoryMovie = rtaMovie.genres;
 
-  
+
+
   expBackgraund.style.backgroundImage = `linear-gradient(rgba(5, 7, 12, 0.75), rgba(5, 7, 12, 0.75)), url('https://image.tmdb.org/t/p/original${rtaMovie.backdrop_path}')`;
   const banner = document.querySelector('.banner');
   const imgExt = document.querySelector('.banner-img');
@@ -75,6 +81,28 @@ async function getMovieId(movieId){
   dateFilm.innerHTML = ` (${year})`; 
   titleExp.innerHTML = rtaMovie.title;
 
+  const expCategory = document.querySelector('.exp-category');
+  const points = document.querySelector('#points');
+  points.innerHTML = rtaMovie.vote_average;
+
+  
+  
+  categoryLi.innerHTML='';
+  categoryMovie.forEach(category => {
+    
+    const categoryItem = document.createElement('a');
+    categoryItem.classList.add('category-item');
+    categoryItem.innerHTML = category.name;
+    categoryLi.appendChild(categoryItem);
+    
+    console.log(movieId);
+  })
+
+  const Ts = document.querySelector('.t-s');
+  Ts.innerHTML=rtaMovie.overview;
+
+
+
   exp.appendChild(expBackgraund);
   expBackgraund.appendChild(banner);
   banner.appendChild(imgExt);
@@ -82,17 +110,81 @@ async function getMovieId(movieId){
   expBackgraund.appendChild(titleContain);
   titleContain.appendChild(titleExp);
   titleExp.appendChild(dateFilm);
+  titleContain.appendChild(expCategory);
+  expCategory.appendChild(points);
+  expCategory.appendChild(categoryUl);
+  categoryUl.appendChild(categoryLi);
+
 
 
   
-  console.log({rtaMovie});
+  console.log({rtaMovie,categoryMovie});
 }
 
+async function geTvId(tvId){
   
+  const resTvId = await fetch(`https://api.themoviedb.org/3/tv/${tvId}?api_key=${API_KEY}`);
+  const rtaTv = await resTvId.json();
+  const categoryTv = rtaTv.genres;
 
-  async function getTrendingTvPreview() {
+  
+  expBackgraund.style.backgroundImage = `linear-gradient(rgba(5, 7, 12, 0.75), rgba(5, 7, 12, 0.75)), url('https://image.tmdb.org/t/p/original${rtaTv.backdrop_path}')`;
+  const banner = document.querySelector('.banner');
+  const imgExt = document.querySelector('.banner-img');
+  imgExt.setAttribute('alt', rtaTv.name);
+  imgExt.setAttribute('src', 'https://image.tmdb.org/t/p/w500' + rtaTv.poster_path);
+  const fav = document.querySelector('.favorite');
+
+  const titleContain = document.querySelector('.exp-title');
+  const titleExp = document.querySelector('.title-film-esp');
+  const dateFilm = document.querySelector('#date-film');
+  const [year, m, d ] = rtaTv.first_air_date.split('-');
+  dateFilm.innerHTML = ` (${year})`; 
+  titleExp.innerHTML = rtaTv.name;
+
+  const expCategory = document.querySelector('.exp-category');
+  const points = document.querySelector('#points');
+  points.innerHTML = rtaTv.vote_average;
+
+  
+  
+  categoryLi.innerHTML='';
+  categoryTv.forEach(category => {
+    
+    const categoryItem = document.createElement('a');
+    categoryItem.classList.add('category-item');
+    categoryItem.innerHTML = category.name;
+    categoryLi.appendChild(categoryItem);
+    
+    console.log(category.name);
+  })
+
+  const Ts = document.querySelector('.t-s');
+  Ts.innerHTML=rtaTv.overview;
+
+
+
+  exp.appendChild(expBackgraund);
+  expBackgraund.appendChild(banner);
+  banner.appendChild(imgExt);
+  banner.appendChild(fav);
+  expBackgraund.appendChild(titleContain);
+  titleContain.appendChild(titleExp);
+  titleExp.appendChild(dateFilm);
+  titleContain.appendChild(expCategory);
+  expCategory.appendChild(points);
+  expCategory.appendChild(categoryUl);
+  categoryUl.appendChild(categoryLi);
+
+
+
+  
+  console.log({rtaTv, categoryTv});
+}
+
+async function getTrendingTvPreview() {
  const res = await fetch("https://api.themoviedb.org/3/trending/tv/day?api_key=" + API_KEY);
- const data = await res.json();
+   const data = await res.json();
  const tvs = data.results;
 
  const liTv = document.querySelector("#tv-li");
@@ -102,6 +194,12 @@ async function getMovieId(movieId){
   
   const containerTv = document.createElement('div');
   containerTv.classList.add('container');
+
+  containerTv.addEventListener('click', () => {
+    location.hash='#tv=' + tv.id;
+    
+  });
+
   const cardTv = document.createElement('div');
   cardTv.classList.add('card');
 
@@ -128,6 +226,82 @@ async function getMovieId(movieId){
  console.log({data, tvs});
 }
 
+async function getTrailerVideoMovie(movieId) {
+
+  const resVideo = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}`);
+  const video = await resVideo.json();
+  
+  const videoResults = video.results;
+
+  const officialTrailer = videoResults.find(video => video.name === "Official Trailer");
+
+  if (officialTrailer) {
+    const videoKey = officialTrailer.key;
+
+    const srcVideo = document.querySelector('#ytplayer');
+    srcVideo.setAttribute('src', `https://www.youtube.com/embed/${videoKey}`);
+
+    const closeBtn = document.getElementById('closeVideoBtn');
+    closeBtn.addEventListener('click', () => {
+      srcVideo.setAttribute('src', '');
+    });
+
+    expCloseBtn.addEventListener('click', () => {
+      srcVideo.setAttribute('src', '');
+      trailerVideo.classList.add('a');
+    });
+
+    console.log({ videoResults, officialTrailer, videoKey });
+  } else {
+    console.log('No se encontró un video con el nombre "Official Trailer".');
+  }
+  
+  
+
+}
+
+async function getTrailerVideoTv(tvId) {
+
+  const resVideo = await fetch(`https://api.themoviedb.org/3/tv/${tvId}/videos?api_key=${API_KEY}`);
+  const video = await resVideo.json();
+  
+  const videoResults = video.results;
+
+  const officialTrailer = videoResults.find(video => video.type === "Trailer");
+
+  if (officialTrailer) {
+    const videoKey = officialTrailer.key;
+
+    const srcVideo = document.querySelector('#ytplayer');
+    srcVideo.setAttribute('src', `https://www.youtube.com/embed/${videoKey}`);
+
+    const closeBtn = document.getElementById('closeVideoBtn');
+    closeBtn.addEventListener('click', () => {
+      srcVideo.setAttribute('src', '');
+    });
+
+    expCloseBtn.addEventListener('click', () => {
+      srcVideo.setAttribute('src', '');
+      trailerVideo.classList.add('a');
+    });
+
+    console.log({ videoResults, officialTrailer, videoKey });
+  } else {
+    alert('Trailer no disponible');
+    console.log('No se encontró un video con el nombre "Official Trailer".');
+  }
+  
+  console.log({video, videoResults});
+
+}
+
+playTrailer.addEventListener('click', () => {
+  const [l, tvId] = location.hash.split('=');
+  const [_, movieId] = location.hash.split('=');
+  getTrailerVideoMovie(movieId);
+  getTrailerVideoTv(tvId);
+  trailerVideo.classList.remove('a');
+ });
 
 async function getCategoryMovies() {
  const resCategory = await fetch("https://api.themoviedb.org/3/genre/movie/list?api_key=" + API_KEY);
@@ -161,11 +335,20 @@ async function getMoviesByCategory(id) {
   const genreData = await resCategory.json();
   const genre = genreData.results;
 
+  const containerCategory = document.querySelector('.container-category--card');
+  containerCategory.innerHTML="";
   genre.forEach(genres => {
+
+    const containerMovies = document.createElement('div');
+    containerMovies.classList.add('container');
+  
+    containerMovies.addEventListener('click', () => {
+        location.hash='#movie=' + genres.id;
+      
+    });
     
-    const containerCategory = document.querySelector('.container-category--card');
-    const categoryCard = document.createElement('div');
-    categoryCard.classList.add('container');
+    // const categoryCard = document.createElement('div');
+    // categoryCard.classList.add('container');
     const titleCard = document.createElement('span');
     titleCard.classList.add('title-card');
     titleCard.innerHTML= genres.title;
@@ -179,10 +362,10 @@ async function getMoviesByCategory(id) {
     
     categoryExt.appendChild(cardCategory);
     
-    containerCategory.appendChild(categoryCard);
-    categoryCard.appendChild(cardCategory);
+    containerCategory.appendChild(containerMovies);
+    containerMovies.appendChild(cardCategory);
     cardCategory.appendChild(cardImg);
-    categoryCard.appendChild(titleCard);
+    containerMovies.appendChild(titleCard);
 
 
     
@@ -193,7 +376,7 @@ async function getMoviesByCategory(id) {
 
 
 async function getMoviesBySearch(query) {
-  const resQuery = await fetch(`https://api.themoviedb.org/3/search/multi?query=${query}&api_key=${API_KEY}`);
+  const resQuery = await fetch(`https://api.themoviedb.org/3/search/movie?query=${query}&api_key=${API_KEY}`);
   
   const genreData = await resQuery.json();
   const genre = genreData.results;
@@ -201,9 +384,19 @@ async function getMoviesBySearch(query) {
   containerCategory.innerHTML="";
   genre.forEach(genres => {
 
-    // const containerCategory = document.querySelector('.container-category--card');
-    const categoryCard = document.createElement('div');
-    categoryCard.classList.add('container');
+
+    const containerMovies = document.createElement('div');
+    containerMovies.classList.add('container');
+  
+    containerMovies.addEventListener('click', () => {
+     
+     
+        location.hash='#movie=' + genres.id;
+      
+    
+  
+  });
+
     
     const cardCategory = document.createElement('div');
     cardCategory.classList.add('card');
@@ -219,10 +412,10 @@ async function getMoviesBySearch(query) {
 
     // searchSelection.appendChild(searchSelection);
     searchSelection.appendChild(containerCategory);
-    containerCategory.appendChild(categoryCard);
-    categoryCard.appendChild(cardCategory);
+    containerCategory.appendChild(containerMovies);
+    containerMovies.appendChild(cardCategory);
     cardCategory.appendChild(cardImg);
-    categoryCard.appendChild(titleCard);
+    containerMovies.appendChild(titleCard);
   
   
     

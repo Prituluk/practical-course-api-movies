@@ -2,9 +2,8 @@ titleHome.addEventListener('click', () => {
  location.hash='#home';
 })
 expCloseBtn.addEventListener('click', () => {
- // expBackgraund.innerHTML='';
  location.hash='#home';
-})
+});
 searchBtn.addEventListener('click', () => {
  location.hash='#search=' + inputTextSearch.value;
 });
@@ -25,6 +24,8 @@ function navigator() {
   searchPage();
  }else if (location.hash.startsWith('#movie=')){
   moviePage();
+ } else if (location.hash.startsWith('#tv=')){
+  tvPage();
  }else if (location.hash.startsWith('#category=')){
   categoryPage();
  }else {
@@ -38,7 +39,6 @@ function navigator() {
 
 function homePage(){
  console.log('home');
-
  exp.classList.add('a');
  categoryExt.classList.add('a');
  searchSelection.classList.add('a');
@@ -72,6 +72,21 @@ function searchPage(){
  console.log('category');
  console.log('search');
 }
+function tvPage(){
+ exp.classList.remove('a');
+ categoryExt.classList.add('a');
+ searchSelection.classList.add('a');
+ navBar.classList.add('a');
+ intro.classList.add('a');
+ films.classList.add('a');
+ tv.classList.add('a');
+ category.classList.add('a');
+ console.log('category');
+ console.log('movie');
+
+ const [aq, tvId] = location.hash.split('=');
+ geTvId(tvId);
+}
 function moviePage(){
  exp.classList.remove('a');
  categoryExt.classList.add('a');
@@ -86,6 +101,8 @@ function moviePage(){
 
  const [_, movieId] = location.hash.split('=');
  getMovieId(movieId);
+ // geTvId(movieId);
+ getTrailerVideoMovie(movieId);
  console.log(movieId);
 }
 function categoryPage(){

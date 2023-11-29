@@ -11,6 +11,19 @@
 </head>
 <body>
  <div class="exp a">
+  <div class="trailer-video a">
+    <div class="video-close-btn">
+      <button id="closeVideoBtn">
+        <img  src="./styles/icons/close-circle-svgrepo-com.svg" alt="">
+      </button>
+    </div>
+    <!-- <video margin-button="-5px" width="100%" height="auto" controls> -->
+      <iframe id="ytplayer" type="text/html" width="100%" height="80%"
+        src="" frameborder="0" allowfullscreen>
+      </iframe>
+    <!-- </video> -->
+  </div>
+  
   <div class="exp-backgraund">
     <div class="exp-close">
       <img class="exp-close--btn" src="./styles/icons/close-circle-svgrepo-com.svg" alt="">
@@ -18,28 +31,29 @@
     
     <div class="banner">
       <img class="banner-img" src="" alt="">
-      <a class="favorite active" href="">♥ Añadir a Favoritos</a>
+      <a class="favorite active" href="">♥ Add to Fav</a>
     </div>
     <div class="exp-title">
       <h3 class="title-film-esp">Ataque a los Titanes <span id="date-film">(2013)</span></h3>
       <div class="exp-category">
-        <span>TV-MA</span>
-          <ul>
-            <li><a href="">Animacion</a></li>
-            <li><a href="">Animacion</a></li>
-            <li><a href="">Animacion</a></li>
-          </ul>
+        <span id="points">TV-MA</span>
+        <ul id="category-ul">
+          <li id="category-li"><a class="category-item" href="">asd</a></li>
+        </ul>
+        
+          
       </div>
       
     </div>
     <div class="exp-sinopsis">
-      <p class="t-t">Vista General</p>
-      <p class="t-s">Hace cien años, los titanes atacaron y diezmaron a la humanidad. Para sobrevivir, esta se recluyó en grandes ciudades amuralladas, creyendo que estaría segura para siempre. Pero, cien años después de aquel ataque, un titán colosal hace su aparición en una de las urbes, destruye el parapeto y permite que sus congéneres menores devoren de nuevo a los hombres. El Cuerpo de Exploradores, al que pertenece Eren Jaeger, deberá enfrentarse a ellos y contraatacarlos, para que la humanidad pueda vivir de nuevo en paz.</p>
+      <p class="t-t">Overview</p>
+      <p class="t-s"></p>
     </div>
     <div class="btn-seeMore">
       <div id="activ-seeMore">
         <img id="btn-play" src="./styles/icons/play-button-svgrepo-com.svg" alt="">
-        <a id="btn-t" href="">Reproducir trailer</a>
+        <button id="btn-t"><p>Play Trailer</p></button>
+        <!-- <a id="btn-t" href="">Play Trailer</a> -->
       </div>
     </div>
   </div>
@@ -120,7 +134,6 @@
   </li>
  </ul>
  
-
  </section>
  <section class="tv " >
   <div class="tv-second">

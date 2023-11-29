@@ -18,4 +18,13 @@ const searchBtn = document.querySelector('.search');
 const searchBtn1 = document.querySelector('.searchs');
 const inputTextSearch = document.querySelector('#textSearch');
 const inputTextSearch1 = document.querySelector('#textSearch1');
-const expBackgraund = document.querySelector('.exp-backgraund')
+const expBackgraund = document.querySelector('.exp-backgraund');
+
+const categoryUl = document.querySelector('#category-ul');
+const categoryLi = document.querySelector('#category-li');
+// const categoryItemA = document.querySelector('category-item');
+
+const contFT = document.querySelector('.container');
+
+const playTrailer = document.querySelector('#activ-seeMore');
+const trailerVideo = document.querySelector('.trailer-video');
