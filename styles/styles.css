@@ -213,7 +213,9 @@ body {
  flex-direction: row;
  list-style: none;
 }
-.container
+.container,
+.containerMovie,
+.containerTv
 {
  width: 200px;
  height: auto;
@@ -221,7 +223,9 @@ body {
  background-color: var(--purple-light-1);
 }
 .container .card,
-.container .card {
+.container .card,
+.containerMovie .card,
+.containerTv .card {
  width: 200px;
  height: 300px;
  background-color: aliceblue;
@@ -451,7 +455,8 @@ footer{
 .video-close-btn:active  {
  opacity: 50%;
 }
-#btn-play {
+#btn-play-movie,
+#btn-play-tv {
  width: 20px;
  height: 20px;
  margin: 0 5px;
@@ -459,7 +464,8 @@ footer{
 -webkit-filter: drop-shadow(10px 10px 5px #fbfafb);
 -moz-filter: drop-shadow(10px 10px 5px #fbfafb);
 }
-#btn-t {
+#btn-t-movie,
+#btn-t-tv {
  font-size: 2.5rem;
  border: none;
  text-decoration: none;

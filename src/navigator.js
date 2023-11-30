@@ -82,10 +82,11 @@ function tvPage(){
  tv.classList.add('a');
  category.classList.add('a');
  console.log('category');
- console.log('movie');
+ console.log('tv');
 
- const [aq, tvId] = location.hash.split('=');
+ const [idSeeMore, tvId] = location.hash.split('=');
  geTvId(tvId);
+ validateTvOrMovie(idSeeMore);
 }
 function moviePage(){
  exp.classList.remove('a');
@@ -99,11 +100,10 @@ function moviePage(){
  console.log('category');
  console.log('movie');
 
- const [_, movieId] = location.hash.split('=');
+ const [idSeeMore, movieId] = location.hash.split('=');
  getMovieId(movieId);
- // geTvId(movieId);
- getTrailerVideoMovie(movieId);
- console.log(movieId);
+ validateTvOrMovie(idSeeMore);
+ 
 }
 function categoryPage(){
  exp.classList.add('a');

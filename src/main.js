@@ -13,9 +13,13 @@ async function getTrendingMoviesPreview() {
    // FRONT CARD
   
   const containerMovies = document.createElement('div');
-  containerMovies.classList.add('container');
+  containerMovies.classList.add('containerMovie');
   
   containerMovies.addEventListener('click', () => {
+    imgPlayTrailerMovies.classList.remove('a');
+    buttonPlayTrailerMovies.classList.remove('a');
+    imgPlayTrailerTv.classList.add('a');
+    buttonPlayTrailerTv.classList.add('a');
     location.hash='#movie=' + movie.id;
     
   });
@@ -83,7 +87,7 @@ async function getMovieId(movieId){
 
   const expCategory = document.querySelector('.exp-category');
   const points = document.querySelector('#points');
-  points.innerHTML = rtaMovie.vote_average;
+  points.innerHTML = rtaMovie.vote_average.toFixed(1);
 
   
   
@@ -116,7 +120,6 @@ async function getMovieId(movieId){
   categoryUl.appendChild(categoryLi);
 
 
-
   
   console.log({rtaMovie,categoryMovie});
 }
@@ -144,7 +147,7 @@ async function geTvId(tvId){
 
   const expCategory = document.querySelector('.exp-category');
   const points = document.querySelector('#points');
-  points.innerHTML = rtaTv.vote_average;
+  points.innerHTML = rtaTv.vote_average.toFixed(1);
 
   
   
@@ -196,6 +199,10 @@ async function getTrendingTvPreview() {
   containerTv.classList.add('container');
 
   containerTv.addEventListener('click', () => {
+    imgPlayTrailerMovies.classList.add('a');
+    buttonPlayTrailerMovies.classList.add('a');
+    imgPlayTrailerTv.classList.remove('a');
+    buttonPlayTrailerTv.classList.remove ('a');
     location.hash='#tv=' + tv.id;
     
   });
@@ -233,7 +240,8 @@ async function getTrailerVideoMovie(movieId) {
   
   const videoResults = video.results;
 
-  const officialTrailer = videoResults.find(video => video.name === "Official Trailer");
+  const officialTrailer = videoResults.find(video => video.name.includes("Official Trailer") || video.name.includes("Trailer") || video.type.includes("Trailer"));
+  const secondTrailer = videoResults.find(video => video.official === true ); 
 
   if (officialTrailer) {
     const videoKey = officialTrailer.key;
@@ -251,12 +259,30 @@ async function getTrailerVideoMovie(movieId) {
       trailerVideo.classList.add('a');
     });
 
-    console.log({ videoResults, officialTrailer, videoKey });
+    console.log({ video, videoResults, officialTrailer, videoKey });
+  } else if (secondTrailer) {
+    const secondVideoKey = secondTrailer.key;
+
+    const srcVideo = document.querySelector('#ytplayer');
+    srcVideo.setAttribute('src', `https://www.youtube.com/embed/${secondVideoKey}`);
+
+    const closeBtn = document.getElementById('closeVideoBtn');
+    closeBtn.addEventListener('click', () => {
+      srcVideo.setAttribute('src', '');
+    });
+
+    expCloseBtn.addEventListener('click', () => {
+      srcVideo.setAttribute('src', '');
+      trailerVideo.classList.add('a');
+    });
   } else {
+    srcAlterVideo.classList.add('a');
+    trailerVideo.classList.add('a');
+    alert('Trailer no disponible');
     console.log('No se encontró un video con el nombre "Official Trailer".');
   }
   
-  
+  console.log(video);
 
 }
 
@@ -268,6 +294,7 @@ async function getTrailerVideoTv(tvId) {
   const videoResults = video.results;
 
   const officialTrailer = videoResults.find(video => video.type === "Trailer");
+  const alterTrailer = videoResults.find(video => video.type);
 
   if (officialTrailer) {
     const videoKey = officialTrailer.key;
@@ -285,22 +312,65 @@ async function getTrailerVideoTv(tvId) {
       trailerVideo.classList.add('a');
     });
 
-    console.log({ videoResults, officialTrailer, videoKey });
+    // console.log({ videoResults, officialTrailer, videoKey });
+  }else if (alterTrailer) {
+    const videoAlter = alterTrailer.key;
+
+    // const srcAlterVideo = document.querySelector('#ytplayer');
+    srcAlterVideo.setAttribute('src', `https://www.youtube.com/embed/${videoAlter}`);
+
+    const closeBtn = document.getElementById('closeVideoBtn');
+    closeBtn.addEventListener('click', () => {
+      srcVideo.setAttribute('src', '');
+    });
+
+    expCloseBtn.addEventListener('click', () => {
+      srcVideo.setAttribute('src', '');
+      trailerVideo.classList.add('a');
+    });
+  
   } else {
+    srcAlterVideo.classList.add('a');
+    trailerVideo.classList.add('a');
     alert('Trailer no disponible');
     console.log('No se encontró un video con el nombre "Official Trailer".');
   }
   
-  console.log({video, videoResults});
+  console.log({video});
 
 }
 
-playTrailer.addEventListener('click', () => {
-  const [l, tvId] = location.hash.split('=');
+function validateTvOrMovie(idSeeMore){
+  if(idSeeMore === "#tv") {
+    imgPlayTrailerMovies.classList.add('a');
+    buttonPlayTrailerMovies.classList.add('a');
+    imgPlayTrailerTv.classList.remove('a');
+    buttonPlayTrailerTv.classList.remove ('a');
+    
+  } else if (idSeeMore === "#movie") {
+    imgPlayTrailerMovies.classList.remove('a');
+    buttonPlayTrailerMovies.classList.remove('a');
+    imgPlayTrailerTv.classList.add('a');
+    buttonPlayTrailerTv.classList.add('a');
+   
+  }else {
+    console.warn("error");
+  }
+}
+
+playTrailerMovies.addEventListener('click', () => {
   const [_, movieId] = location.hash.split('=');
   getTrailerVideoMovie(movieId);
+  trailerVideo.classList.remove('a');
+  srcAlterVideo.classList.remove('a');
+ });
+
+playTrailerTv.addEventListener('click', () => {
+  const [l, tvId] = location.hash.split('=');
   getTrailerVideoTv(tvId);
   trailerVideo.classList.remove('a');
+  srcAlterVideo.classList.remove('a');
+
  });
 
 async function getCategoryMovies() {

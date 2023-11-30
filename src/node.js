@@ -9,6 +9,7 @@ const categoryExt = document.querySelector('.category-selection');
 // const categorySelection = document.querySelector('.category-selection');
 const searchSelection = document.querySelector('.search-selection');
 
+
 // ELEMENTS
 
 const titleHome = document.querySelector('#title-home');
@@ -26,5 +27,13 @@ const categoryLi = document.querySelector('#category-li');
 
 const contFT = document.querySelector('.container');
 
-const playTrailer = document.querySelector('#activ-seeMore');
-const trailerVideo = document.querySelector('.trailer-video');
+const playTrailerMovies = document.querySelector('#activ-seeMore-movies');
+const imgPlayTrailerMovies = document.querySelector('#btn-play-movie');
+const buttonPlayTrailerMovies = document.querySelector('#btn-t-movie');
+
+const playTrailerTv = document.querySelector('#activ-seeMore-tv');
+const imgPlayTrailerTv = document.querySelector('#btn-play-tv');
+const buttonPlayTrailerTv = document.querySelector('#btn-t-tv');
+
+const srcAlterVideo = document.querySelector('#ytplayer');
+const trailerVideo = document.querySelector('.trailer-video');  
