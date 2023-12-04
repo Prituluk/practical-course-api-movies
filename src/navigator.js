@@ -2,7 +2,8 @@ titleHome.addEventListener('click', () => {
  location.hash='#home';
 })
 expCloseBtn.addEventListener('click', () => {
- location.hash='#home';
+    // history.back(); //problema en interaccion con la seccion del "ver trailer" y al cambiar de peliculas a series.
+    location.hash='#home';
 });
 searchBtn.addEventListener('click', () => {
  location.hash='#search=' + inputTextSearch.value;
@@ -28,6 +29,7 @@ function navigator() {
   tvPage();
  }else if (location.hash.startsWith('#category=')){
   categoryPage();
+  
  }else {
   homePage();
  }
