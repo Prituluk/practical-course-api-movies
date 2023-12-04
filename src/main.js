@@ -406,7 +406,6 @@ async function getMoviesByCategory(id) {
   const genre = genreData.results;
 
   const containerCategory = document.querySelector('.container-category--card');
-  containerCategory.innerHTML="";
   genre.forEach(genres => {
 
     const containerMovies = document.createElement('div');
